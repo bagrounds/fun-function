@@ -1,0 +1,11 @@
+node_modules
+
+# vim temp files
+*.swp
+
+# auto generated
+coverage
+public
+docs
+.nyc_output
+

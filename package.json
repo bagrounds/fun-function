@@ -1,0 +1,42 @@
+{
+  "name": "fun-function",
+  "version": "0.1.0",
+  "description": "Functions for working with functions functionally",
+  "main": "src/index.js",
+  "scripts": {
+    "pretest": "npm run lint",
+    "test": "tap -Rtap --coverage-report=text-summary ./test/index.js",
+    "coverage": "tap --coverage-report=lcov ./test/index.js",
+    "predependencies": "mkdir -p img",
+    "dependencies": "madge . --image img/dependencies.svg -x 'test|coverage|docs' --include-npm",
+    "postdependencies": "npm run dependencies-test",
+    "dependencies-test": "madge . --image img/dependencies-test.svg -x 'coverage|docs' --include-npm",
+    "pages-index": "showdown makehtml -i README.md -o public/index.html",
+    "pages": "./script/pages.sh",
+    "lint": "eslint --ignore-path .gitignore --fix .",
+    "predocument": "rm -rf docs",
+    "document": "jsdoc -c .jsdoc.json",
+    "readme": "cat readme/* > README.md"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/bagrounds/fun-function.git"
+  },
+  "author": "bagrounds@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://gitlab.com/bagrounds/fun-function/issues"
+  },
+  "homepage": "https://gitlab.com/bagrounds/fun-function#README",
+  "devDependencies": {
+    "eslint": "^3.18.0",
+    "jsdoc": "^3.4.3",
+    "madge": "^1.6.0",
+    "showdown": "^1.6.4",
+    "tap": "^10.3.1"
+  },
+  "dependencies": {
+    "fun-compose": "^0.3.3",
+    "fun-curry": "^0.2.6"
+  }
+}
