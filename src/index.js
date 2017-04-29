@@ -7,7 +7,7 @@
 
   /* imports */
   var curry = require('fun-curry')
-  var compose = require('fun-compose')
+  var funCompose = require('fun-compose')
 
   /* exports */
   module.exports = {
@@ -26,10 +26,23 @@
    * @param {Function} g - y -> b
    * @param {Function} source - x -> y
    *
-   * @return {Function} of elements in this array
+   * @return {Function} g.source.f
    */
   function diMap (f, g, source) {
     return composeAll([g, source, f])
+  }
+
+  /**
+   *
+   * @function module:fun-function.compose
+   *
+   * @param {Function} f - a unary function
+   * @param {Function} g - an N-ary function
+   *
+   * @return {Function} (f . g) - the N-ary function composition of f and g
+   */
+  function compose (f, g) {
+    return funCompose(f, g)
   }
 
   /**
