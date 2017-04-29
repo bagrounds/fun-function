@@ -12,7 +12,7 @@ Functions for working with functions functionally
 
 ## [Test Coverage](https://bagrounds.gitlab.io/fun-function/coverage/lcov-report/index.html)
 
-## [API Docs](https://bagrounds.gitlab.io/fun-function/docs/index.html)
+## [API Docs](https://bagrounds.gitlab.io/fun-function/index.html)
 
 ## Dependencies
 
