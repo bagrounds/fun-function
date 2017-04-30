@@ -17,7 +17,21 @@
     composeAll: composeAll,
     k: k,
     id: id,
-    iterate: curry(iterate)
+    iterate: curry(iterate),
+    apply: curry(apply)
+  }
+
+  /**
+   *
+   * @function module:fun-function.apply
+   *
+   * @param {Array} args - to apply to f
+   * @param {Function} f - function to apply arguments to
+   *
+   * @return {Function} result of f(...args)
+   */
+  function apply (args, f) {
+    return f.apply(null, args)
   }
 
   /**
