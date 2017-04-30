@@ -18,7 +18,23 @@
     k: k,
     id: id,
     iterate: curry(iterate),
-    apply: curry(apply)
+    apply: curry(apply),
+    applyFrom: curry(applyFrom)
+  }
+
+  /**
+   *
+   * @function module:fun-function.applyFrom
+   *
+   * @param {Object} options - input parameters
+   * @param {Function} options.inputs - source -> [...args]
+   * @param {Function} options.f - source -> ([...args] -> *)
+   * @param {*} source - for inputs and f
+   *
+   * @return {*} result of f(source)(...inputs(source))
+   */
+  function applyFrom (options, source) {
+    return apply(options.inputs(source), options.f(source))
   }
 
   /**
