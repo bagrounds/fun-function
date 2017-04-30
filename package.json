@@ -1,6 +1,6 @@
 {
   "name": "fun-function",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Functions for working with functions functionally",
   "main": "src/index.js",
   "scripts": {
