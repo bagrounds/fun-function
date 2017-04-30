@@ -37,6 +37,7 @@
   },
   "dependencies": {
     "fun-compose": "^0.3.3",
-    "fun-curry": "^0.2.6"
+    "fun-curry": "^0.2.6",
+    "fun-unfold": "^0.3.0"
   }
 }

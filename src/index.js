@@ -8,6 +8,7 @@
   /* imports */
   var curry = require('fun-curry')
   var funCompose = require('fun-compose')
+  var unfold = require('fun-unfold')
 
   /* exports */
   module.exports = {
@@ -15,7 +16,30 @@
     compose: curry(compose),
     composeAll: composeAll,
     k: k,
-    id: id
+    id: id,
+    iterate: curry(iterate)
+  }
+
+  /**
+   *
+   * @function module:fun-function.iterate
+   *
+   * @param {Number} n - number of times to iterate f
+   * @param {Function} f - x -> x
+   * @param {*} x - initial argument to f
+   *
+   * @return {Function} f(f(...f(x)...)) (f applied to x n times)
+   */
+  function iterate (n, f, x) {
+    return unfold(next, stop, [0, x])[1]
+
+    function next (pair) {
+      return [pair[0] + 1, f(pair[1])]
+    }
+
+    function stop (pair) {
+      return pair[0] >= n
+    }
   }
 
   /**
