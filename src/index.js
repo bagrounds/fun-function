@@ -12,7 +12,7 @@
 
   /* exports */
   module.exports = {
-    diMap: curry(diMap),
+    dimap: curry(dimap),
     compose: curry(compose),
     composeAll: composeAll,
     k: k,
@@ -102,7 +102,7 @@
 
   /**
    *
-   * @function module:fun-function.diMap
+   * @function module:fun-function.dimap
    *
    * @param {Function} f - a -> x
    * @param {Function} g - y -> b
@@ -110,7 +110,7 @@
    *
    * @return {Function} g.source.f
    */
-  function diMap (f, g, source) {
+  function dimap (f, g, source) {
     return composeAll([g, source, f])
   }
 
