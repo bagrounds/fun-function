@@ -17,9 +17,37 @@
     composeAll: composeAll,
     k: k,
     id: id,
+    arg: arg,
+    args: args,
     iterate: curry(iterate),
     apply: curry(apply),
     applyFrom: curry(applyFrom)
+  }
+
+  /**
+   *
+   * @function module:fun-function.args
+   *
+   * @return {Function} that returns its arguments as an array
+   */
+  function args () {
+    return function args () {
+      return Array.prototype.slice.call(arguments)
+    }
+  }
+
+  /**
+   *
+   * @function module:fun-function.arg
+   *
+   * @param {Number} n - index of argument to return
+   *
+   * @return {Function} that returns its nth argument
+   */
+  function arg (n) {
+    return function () {
+      return arguments[n]
+    }
   }
 
   /**
