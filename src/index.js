@@ -13,6 +13,8 @@
   /* exports */
   module.exports = {
     dimap: curry(dimap),
+    map: curry(map),
+    contramap: curry(contramap),
     compose: curry(compose),
     composeAll: composeAll,
     k: k,
@@ -21,7 +23,8 @@
     args: args,
     iterate: curry(iterate),
     apply: curry(apply),
-    applyFrom: curry(applyFrom)
+    applyFrom: curry(applyFrom),
+    curry: curry
   }
 
   /**
@@ -98,6 +101,32 @@
     function stop (pair) {
       return pair[0] >= n
     }
+  }
+
+  /**
+   *
+   * @function module:fun-function.map
+   *
+   * @param {Function} f - y -> b
+   * @param {Function} source - x -> y
+   *
+   * @return {Function} source.f
+   */
+  function map (f, source) {
+    return compose(f, source)
+  }
+
+  /**
+   *
+   * @function module:fun-function.contramap
+   *
+   * @param {Function} f - a -> x
+   * @param {Function} source - x -> y
+   *
+   * @return {Function} source.f
+   */
+  function contramap (f, source) {
+    return compose(source, f)
   }
 
   /**
