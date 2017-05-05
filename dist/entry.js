@@ -1,0 +1,2 @@
+funFunction = require('../src')
+
