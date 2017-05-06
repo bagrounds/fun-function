@@ -7,7 +7,6 @@
 
   /* imports */
   var stringify = require('stringify-anything')
-  var funCompose = require('fun-compose')
   var unfold = require('fun-unfold')
   var setProp = require('set-prop')
 
@@ -268,7 +267,12 @@
    * @return {Function} (f . g) - the N-ary function composition of f and g
    */
   function compose (f, g) {
-    return funCompose(f, g)
+    return setProp(
+      'length',
+      g.length,
+      setProp('name', stringify(f) + '.' + stringify(g), function () {
+        return f(g.apply(null, arguments))
+      }))
   }
 
   /**
