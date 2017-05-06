@@ -5,7 +5,7 @@
   },
   "source": {
     "include": ["."],
-    "exclude": ["node_modules","docs","coverage","public"],
+    "exclude": ["node_modules","docs","coverage","public", "dist"],
     "includePattern": ".+\\.js(doc)?$",
     "excludePattern": "(^|\\/|\\\\)_"
   },
