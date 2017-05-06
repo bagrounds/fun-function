@@ -9,6 +9,7 @@
   var curry = require('fun-curry')
   var funCompose = require('fun-compose')
   var unfold = require('fun-unfold')
+  var setProp = require('set-prop')
 
   /* exports */
   module.exports = {
@@ -21,10 +22,94 @@
     id: id,
     arg: arg,
     args: args,
+    reArg: curry(reArg),
+    flip: flip,
+    argsToArray: argsToArray,
+    argsToObject: curry(argsToObject),
     iterate: curry(iterate),
     apply: curry(apply),
     applyFrom: curry(applyFrom),
     curry: curry
+  }
+
+  /**
+   * Warning: this function can't always set the length of the returned function
+   * accurately because that is determined by the length of the array passed
+   * to the input parameter function t, which cannot be known until t is called.
+   * If t were to accept regular arguments instead of an array, the length
+   * could be set properly - but with a loss of generality realized by
+   * transforming an array (e.g. you can reverse an array of any length - so you
+   * can use this function to reverse the order of arguments for a function that
+   * accepts a variable number of arguments.)
+   *
+   * @function module:fun-function.reArg
+   *
+   * @param {Function} t - [tArgs] -> [fArgs]
+   * @param {Function} f - fArgs -> z
+   *
+   * @return {Function} tArgs -> z
+   */
+  function reArg (t, f) {
+    return setProp(
+      'length',
+      t.length,
+      setProp('name', t.name + '(' + f.name + ')', result)
+    )
+
+    function result () {
+      return apply(t(Array.prototype.slice.call(arguments)), f)
+    }
+  }
+
+  /**
+   *
+   * @function module:fun-function.flip
+   *
+   * @param {Function} f - (a1, a2, ..., an) -> z
+   *
+   * @return {Function} (an, ..., a2, a1) -> z
+   */
+  function flip (f) {
+    return setProp('length', f.length, reArg(reverse, f))
+
+    function reverse (args) {
+      return args.map(id).reverse()
+    }
+  }
+
+  /**
+   *
+   * @function module:fun-function.argsToArray
+   *
+   * @param {Function} f - (a1, a2, ..., an) -> z
+   *
+   * @return {Function} ([a1, a2, ..., an]) -> z
+   */
+  function argsToArray (f) {
+    return reArg(toArray, f)
+
+    function toArray (args) {
+      return args[0]
+    }
+  }
+
+  /**
+   *
+   * @function module:fun-function.argsToObject
+   *
+   * @param {Array} keys - [k1, k2, ..., kn]
+   * @param {Function} f - (a1, a2, ..., an) -> z
+   *
+   * @return {Function} ({k1: a1, k2: a2, ..., kn: an}) -> z
+   */
+  function argsToObject (keys, f) {
+    return reArg(toObject, f)
+
+    function toObject (object) {
+      return keys.map(function (key) {
+        return object[0][key]
+      })
+    }
   }
 
   /**

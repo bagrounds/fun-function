@@ -41,6 +41,7 @@
   "dependencies": {
     "fun-compose": "^0.3.3",
     "fun-curry": "^0.2.6",
-    "fun-unfold": "^0.3.0"
+    "fun-unfold": "^0.3.0",
+    "set-prop": "^0.1.2"
   }
 }
