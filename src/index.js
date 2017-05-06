@@ -20,6 +20,7 @@
     composeAll: composeAll,
     k: k,
     id: id,
+    tee: curry(tee),
     arg: arg,
     args: args,
     reArg: curry(reArg),
@@ -263,6 +264,21 @@
    */
   function id (a) {
     return a
+  }
+
+  /**
+   *
+   * @function module:fun-function.tee
+   *
+   * @param {Function} f - x -> *
+   * @param {*} x - argument to f
+   *
+   * @return {*} x
+   */
+  function tee (f, x) {
+    f(x)
+
+    return x
   }
 
   /**
