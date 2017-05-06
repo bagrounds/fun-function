@@ -17,7 +17,7 @@
     "lint": "eslint --ignore-path .gitignore --fix . --ignore-pattern dist",
     "predocument": "rm -rf docs",
     "document": "jsdoc -c .jsdoc.json",
-    "browserify": "browserify dist/entry.js -o dist/bundle.js --no-bf",
+    "browserify": "browserify dist/entry.js --no-bf | uglifyjs > dist/bundle.js",
     "readme": "cat readme/* > README.md"
   },
   "repository": {
@@ -36,7 +36,8 @@
     "eslint": "^3.18.0",
     "jsdoc": "^3.4.3",
     "madge": "^1.6.0",
-    "tap": "^10.3.1"
+    "tap": "^10.3.1",
+    "uglify-js": "^2.8.22"
   },
   "dependencies": {
     "fun-compose": "^0.3.3",
