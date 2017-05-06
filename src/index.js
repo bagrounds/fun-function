@@ -6,7 +6,7 @@
   'use strict'
 
   /* imports */
-  var curry = require('fun-curry')
+  var stringify = require('stringify-anything')
   var funCompose = require('fun-compose')
   var unfold = require('fun-unfold')
   var setProp = require('set-prop')
@@ -31,6 +31,35 @@
     apply: curry(apply),
     applyFrom: curry(applyFrom),
     curry: curry
+  }
+
+  /**
+   *
+   * @function module:fun-function.curry
+   *
+   * @param {Function} f - function to curry
+   * @param {Number} [arity] - number of arguments f should accept
+   * @param {Array} [args] - initial arguments to apply
+   *
+   * @return {Function} a_1 -> a_2 -> ... -> a_arity -> f(a_1, ..., a_arity)
+   */
+  function curry (f, arity, args) {
+    arity = arity || f.length
+    args = args || []
+
+    return setProp('name', partialName(f, args),
+      setProp('length', arity, function () {
+        var newArgs = args.concat(Array.prototype.slice.call(arguments))
+
+        return newArgs.length >= arity
+          ? f.apply(null, newArgs)
+          : setProp('length', arity - newArgs.length, curry(f, arity, newArgs))
+      })
+    )
+
+    function partialName (f, args) {
+      return stringify(f) + '(' + stringify(args) + ')'
+    }
   }
 
   /**
