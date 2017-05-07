@@ -11,8 +11,8 @@
 <polygon fill="#000000" stroke="none" points="-7.992,7.992 -7.992,-187.992 3972.11,-187.992 3972.11,7.992 -7.992,7.992"/>
 <!-- dist/bundle -->
 <g id="node1" class="node"><title>dist/bundle</title>
-<ellipse fill="none" stroke="#c6c5fe" cx="1408.63" cy="-162" rx="55.7903" ry="18"/>
-<text text-anchor="middle" x="1408.63" y="-158.3" font-family="Arial" font-size="14.00" fill="#c6c5fe">dist/bundle</text>
+<ellipse fill="none" stroke="#c6c5fe" cx="1576.63" cy="-162" rx="55.7903" ry="18"/>
+<text text-anchor="middle" x="1576.63" y="-158.3" font-family="Arial" font-size="14.00" fill="#c6c5fe">dist/bundle</text>
 </g>
 <!-- node_modules/deep&#45;equal/index -->
 <g id="node2" class="node"><title>node_modules/deep&#45;equal/index</title>
@@ -21,8 +21,8 @@
 </g>
 <!-- dist/bundle&#45;&gt;node_modules/deep&#45;equal/index -->
 <g id="edge1" class="edge"><title>dist/bundle&#45;&gt;node_modules/deep&#45;equal/index</title>
-<path fill="none" stroke="#757575" d="M1464.61,-160.974C1685.85,-160.527 2520.63,-155.59 3205.63,-108 3220.12,-106.994 3235.33,-105.663 3250.34,-104.188"/>
-<polygon fill="#757575" stroke="#757575" points="3251.08,-107.631 3260.68,-103.146 3250.38,-100.666 3251.08,-107.631"/>
+<path fill="none" stroke="#757575" d="M1632.63,-160.733C1840.82,-159.412 2589.97,-151.713 3205.63,-108 3220,-106.98 3235.1,-105.649 3249.99,-104.181"/>
+<polygon fill="#757575" stroke="#757575" points="3250.67,-107.631 3260.26,-103.145 3249.96,-100.666 3250.67,-107.631"/>
 </g>
 <!-- node_modules/fun&#45;assert/src/index -->
 <g id="node3" class="node"><title>node_modules/fun&#45;assert/src/index</title>
@@ -31,13 +31,13 @@
 </g>
 <!-- dist/bundle&#45;&gt;node_modules/fun&#45;assert/src/index -->
 <g id="edge2" class="edge"><title>dist/bundle&#45;&gt;node_modules/fun&#45;assert/src/index</title>
-<path fill="none" stroke="#757575" d="M1353.34,-158.564C1216.39,-152.079 851.149,-133.161 547.634,-108 534.563,-106.916 520.917,-105.676 507.372,-104.37"/>
-<polygon fill="#757575" stroke="#757575" points="507.339,-100.85 497.045,-103.36 506.657,-107.817 507.339,-100.85"/>
+<path fill="none" stroke="#757575" d="M1521.32,-159.268C1366.89,-154.018 918.669,-136.851 547.634,-108 534.199,-106.955 520.16,-105.72 506.249,-104.4"/>
+<polygon fill="#757575" stroke="#757575" points="506.443,-100.902 496.153,-103.425 505.77,-107.87 506.443,-100.902"/>
 </g>
 <!-- dist/bundle&#45;&gt;node_modules/fun&#45;assert/src/index -->
 <g id="edge3" class="edge"><title>dist/bundle&#45;&gt;node_modules/fun&#45;assert/src/index</title>
-<path fill="none" stroke="#757575" d="M1353.81,-158.145C1219.31,-151.294 862.872,-132.64 565.634,-108 549.57,-106.668 532.637,-105.1 515.9,-103.463"/>
-<polygon fill="#757575" stroke="#757575" points="515.809,-99.9375 505.514,-102.437 515.121,-106.904 515.809,-99.9375"/>
+<path fill="none" stroke="#757575" d="M1521.37,-158.975C1368.9,-153.401 930.039,-136.335 565.634,-108 549.173,-106.72 531.804,-105.154 514.669,-103.495"/>
+<polygon fill="#757575" stroke="#757575" points="514.91,-100.002 504.616,-102.51 514.227,-106.969 514.91,-100.002"/>
 </g>
 <!-- node_modules/fun&#45;compose/src/index -->
 <g id="node4" class="node"><title>node_modules/fun&#45;compose/src/index</title>
@@ -46,13 +46,8 @@
 </g>
 <!-- dist/bundle&#45;&gt;node_modules/fun&#45;compose/src/index -->
 <g id="edge4" class="edge"><title>dist/bundle&#45;&gt;node_modules/fun&#45;compose/src/index</title>
-<path fill="none" stroke="#757575" d="M1355.9,-155.909C1249.5,-145.207 1006.91,-120.072 858.281,-104.407"/>
-<polygon fill="#757575" stroke="#757575" points="858.499,-100.911 848.187,-103.343 857.765,-107.872 858.499,-100.911"/>
-</g>
-<!-- dist/bundle&#45;&gt;node_modules/fun&#45;compose/src/index -->
-<g id="edge5" class="edge"><title>dist/bundle&#45;&gt;node_modules/fun&#45;compose/src/index</title>
-<path fill="none" stroke="#757575" d="M1356.83,-155.212C1252.2,-144.013 1013.17,-119.138 863.681,-103.845"/>
-<polygon fill="#757575" stroke="#757575" points="863.825,-100.342 853.521,-102.807 863.113,-107.306 863.825,-100.342"/>
+<path fill="none" stroke="#757575" d="M1522.82,-156.99C1409.76,-148.503 1139.3,-127.868 912.634,-108 897.14,-106.642 880.893,-105.164 864.781,-103.666"/>
+<polygon fill="#757575" stroke="#757575" points="865.057,-100.176 854.774,-102.731 864.405,-107.146 865.057,-100.176"/>
 </g>
 <!-- node_modules/fun&#45;curry/src/index -->
 <g id="node5" class="node"><title>node_modules/fun&#45;curry/src/index</title>
@@ -60,9 +55,9 @@
 <text text-anchor="middle" x="1071.63" y="-86.3" font-family="Arial" font-size="14.00" fill="#cfffac">node_modules/fun&#45;curry/src/index</text>
 </g>
 <!-- dist/bundle&#45;&gt;node_modules/fun&#45;curry/src/index -->
-<g id="edge6" class="edge"><title>dist/bundle&#45;&gt;node_modules/fun&#45;curry/src/index</title>
-<path fill="none" stroke="#757575" d="M1362.83,-151.487C1309.08,-140.322 1218.95,-121.6 1153.18,-107.937"/>
-<polygon fill="#757575" stroke="#757575" points="1153.75,-104.482 1143.25,-105.875 1152.33,-111.336 1153.75,-104.482"/>
+<g id="edge5" class="edge"><title>dist/bundle&#45;&gt;node_modules/fun&#45;curry/src/index</title>
+<path fill="none" stroke="#757575" d="M1526.37,-154.032C1445.04,-142.759 1282.94,-120.29 1175.88,-105.45"/>
+<polygon fill="#757575" stroke="#757575" points="1176.09,-101.945 1165.7,-104.039 1175.12,-108.879 1176.09,-101.945"/>
 </g>
 <!-- node_modules/fun&#45;predicate/src/index -->
 <g id="node6" class="node"><title>node_modules/fun&#45;predicate/src/index</title>
@@ -70,14 +65,14 @@
 <text text-anchor="middle" x="1408.63" y="-86.3" font-family="Arial" font-size="14.00" fill="#cfffac">node_modules/fun&#45;predicate/src/index</text>
 </g>
 <!-- dist/bundle&#45;&gt;node_modules/fun&#45;predicate/src/index -->
-<g id="edge7" class="edge"><title>dist/bundle&#45;&gt;node_modules/fun&#45;predicate/src/index</title>
-<path fill="none" stroke="#757575" d="M1402.76,-144.055C1401.94,-136.346 1401.7,-127.027 1402.03,-118.364"/>
-<polygon fill="#757575" stroke="#757575" points="1405.53,-118.491 1402.72,-108.275 1398.54,-118.012 1405.53,-118.491"/>
+<g id="edge6" class="edge"><title>dist/bundle&#45;&gt;node_modules/fun&#45;predicate/src/index</title>
+<path fill="none" stroke="#757575" d="M1540.46,-148.161C1514.56,-137.993 1479.69,-123.585 1452.27,-111.779"/>
+<polygon fill="#757575" stroke="#757575" points="1453.48,-108.487 1442.91,-107.722 1450.7,-114.91 1453.48,-108.487"/>
 </g>
 <!-- dist/bundle&#45;&gt;node_modules/fun&#45;predicate/src/index -->
-<g id="edge8" class="edge"><title>dist/bundle&#45;&gt;node_modules/fun&#45;predicate/src/index</title>
-<path fill="none" stroke="#757575" d="M1414.51,-144.055C1415.33,-136.346 1415.57,-127.027 1415.24,-118.364"/>
-<polygon fill="#757575" stroke="#757575" points="1418.72,-118.012 1414.55,-108.275 1411.74,-118.491 1418.72,-118.012"/>
+<g id="edge7" class="edge"><title>dist/bundle&#45;&gt;node_modules/fun&#45;predicate/src/index</title>
+<path fill="none" stroke="#757575" d="M1547.42,-146.496C1524.21,-136.278 1491.24,-122.462 1463.22,-111.171"/>
+<polygon fill="#757575" stroke="#757575" points="1464.52,-107.919 1453.93,-107.448 1461.91,-114.416 1464.52,-107.919"/>
 </g>
 <!-- node_modules/fun&#45;unfold/src/index -->
 <g id="node7" class="node"><title>node_modules/fun&#45;unfold/src/index</title>
@@ -85,9 +80,9 @@
 <text text-anchor="middle" x="3491.63" y="-14.3" font-family="Arial" font-size="14.00" fill="#cfffac">node_modules/fun&#45;unfold/src/index</text>
 </g>
 <!-- dist/bundle&#45;&gt;node_modules/fun&#45;unfold/src/index -->
-<g id="edge9" class="edge"><title>dist/bundle&#45;&gt;node_modules/fun&#45;unfold/src/index</title>
-<path fill="none" stroke="#757575" d="M1464.47,-160.661C1794.68,-158.527 3478.77,-145.802 3515.63,-108 3532.01,-91.2086 3521.77,-64.4744 3510.02,-44.6847"/>
-<polygon fill="#757575" stroke="#757575" points="3512.92,-42.7149 3504.61,-36.1414 3507,-46.4617 3512.92,-42.7149"/>
+<g id="edge8" class="edge"><title>dist/bundle&#45;&gt;node_modules/fun&#45;unfold/src/index</title>
+<path fill="none" stroke="#757575" d="M1632.55,-160.536C1946.98,-157.796 3481.91,-142.657 3515.63,-108 3531.99,-91.1907 3521.75,-64.4592 3510.01,-44.6749"/>
+<polygon fill="#757575" stroke="#757575" points="3512.91,-42.7086 3504.6,-36.1343 3507,-46.4548 3512.91,-42.7086"/>
 </g>
 <!-- node_modules/guarded/src/index -->
 <g id="node8" class="node"><title>node_modules/guarded/src/index</title>
@@ -95,9 +90,9 @@
 <text text-anchor="middle" x="1744.63" y="-86.3" font-family="Arial" font-size="14.00" fill="#cfffac">node_modules/guarded/src/index</text>
 </g>
 <!-- dist/bundle&#45;&gt;node_modules/guarded/src/index -->
-<g id="edge10" class="edge"><title>dist/bundle&#45;&gt;node_modules/guarded/src/index</title>
-<path fill="none" stroke="#757575" d="M1454.3,-151.487C1507.89,-140.322 1597.75,-121.6 1663.33,-107.937"/>
-<polygon fill="#757575" stroke="#757575" points="1664.16,-111.341 1673.23,-105.875 1662.73,-104.488 1664.16,-111.341"/>
+<g id="edge9" class="edge"><title>dist/bundle&#45;&gt;node_modules/guarded/src/index</title>
+<path fill="none" stroke="#757575" d="M1609.42,-147.337C1633.94,-137.122 1667.87,-122.987 1695.6,-111.431"/>
+<polygon fill="#757575" stroke="#757575" points="1697.24,-114.538 1705.13,-107.461 1694.55,-108.077 1697.24,-114.538"/>
 </g>
 <!-- node_modules/json&#45;stringify&#45;safe/stringify -->
 <g id="node9" class="node"><title>node_modules/json&#45;stringify&#45;safe/stringify</title>
@@ -105,14 +100,14 @@
 <text text-anchor="middle" x="2093.63" y="-86.3" font-family="Arial" font-size="14.00" fill="#cfffac">node_modules/json&#45;stringify&#45;safe/stringify</text>
 </g>
 <!-- dist/bundle&#45;&gt;node_modules/json&#45;stringify&#45;safe/stringify -->
-<g id="edge11" class="edge"><title>dist/bundle&#45;&gt;node_modules/json&#45;stringify&#45;safe/stringify</title>
-<path fill="none" stroke="#757575" d="M1460.78,-155.272C1566.05,-144.188 1806.65,-119.55 1959.02,-104.202"/>
-<polygon fill="#757575" stroke="#757575" points="1959.78,-107.644 1969.38,-103.159 1959.08,-100.679 1959.78,-107.644"/>
+<g id="edge10" class="edge"><title>dist/bundle&#45;&gt;node_modules/json&#45;stringify&#45;safe/stringify</title>
+<path fill="none" stroke="#757575" d="M1626.65,-153.641C1707.05,-142.391 1866.95,-120.68 1977.09,-106.013"/>
+<polygon fill="#757575" stroke="#757575" points="1977.81,-109.449 1987.26,-104.661 1976.88,-102.51 1977.81,-109.449"/>
 </g>
 <!-- dist/bundle&#45;&gt;node_modules/json&#45;stringify&#45;safe/stringify -->
-<g id="edge12" class="edge"><title>dist/bundle&#45;&gt;node_modules/json&#45;stringify&#45;safe/stringify</title>
-<path fill="none" stroke="#757575" d="M1461.6,-155.966C1568.62,-145.371 1813.04,-120.454 1964.66,-104.741"/>
-<polygon fill="#757575" stroke="#757575" points="1965.38,-108.185 1974.97,-103.672 1964.66,-101.223 1965.38,-108.185"/>
+<g id="edge11" class="edge"><title>dist/bundle&#45;&gt;node_modules/json&#45;stringify&#45;safe/stringify</title>
+<path fill="none" stroke="#757575" d="M1627.98,-154.602C1710.62,-143.802 1874.72,-121.656 1984.39,-106.566"/>
+<polygon fill="#757575" stroke="#757575" points="1985.07,-110.006 1994.5,-105.174 1984.11,-103.072 1985.07,-110.006"/>
 </g>
 <!-- node_modules/prelude&#45;ls/lib/index -->
 <g id="node10" class="node"><title>node_modules/prelude&#45;ls/lib/index</title>
@@ -120,9 +115,9 @@
 <text text-anchor="middle" x="2445.63" y="-86.3" font-family="Arial" font-size="14.00" fill="#cfffac">node_modules/prelude&#45;ls/lib/index</text>
 </g>
 <!-- dist/bundle&#45;&gt;node_modules/prelude&#45;ls/lib/index -->
-<g id="edge13" class="edge"><title>dist/bundle&#45;&gt;node_modules/prelude&#45;ls/lib/index</title>
-<path fill="none" stroke="#757575" d="M1463.53,-158.534C1601.62,-152.146 1974.5,-133.742 2284.63,-108 2298.97,-106.81 2314.01,-105.416 2328.9,-103.948"/>
-<polygon fill="#757575" stroke="#757575" points="2329.57,-107.398 2339.18,-102.92 2328.88,-100.433 2329.57,-107.398"/>
+<g id="edge12" class="edge"><title>dist/bundle&#45;&gt;node_modules/prelude&#45;ls/lib/index</title>
+<path fill="none" stroke="#757575" d="M1630.86,-157.506C1749.5,-149.739 2040.95,-129.981 2284.63,-108 2298.74,-106.728 2313.52,-105.298 2328.18,-103.822"/>
+<polygon fill="#757575" stroke="#757575" points="2328.7,-107.288 2338.29,-102.794 2327.99,-100.323 2328.7,-107.288"/>
 </g>
 <!-- node_modules/ramda/index -->
 <g id="node11" class="node"><title>node_modules/ramda/index</title>
@@ -130,9 +125,9 @@
 <text text-anchor="middle" x="2741.63" y="-86.3" font-family="Arial" font-size="14.00" fill="#cfffac">node_modules/ramda/index</text>
 </g>
 <!-- dist/bundle&#45;&gt;node_modules/ramda/index -->
-<g id="edge14" class="edge"><title>dist/bundle&#45;&gt;node_modules/ramda/index</title>
-<path fill="none" stroke="#757575" d="M1464.27,-160.141C1635.14,-157.16 2167.37,-145.312 2606.63,-108 2618.89,-106.959 2631.75,-105.638 2644.46,-104.194"/>
-<polygon fill="#757575" stroke="#757575" points="2645.07,-107.646 2654.6,-103.012 2644.26,-100.693 2645.07,-107.646"/>
+<g id="edge13" class="edge"><title>dist/bundle&#45;&gt;node_modules/ramda/index</title>
+<path fill="none" stroke="#757575" d="M1632.28,-159.582C1787.02,-155.327 2235.43,-140.878 2606.63,-108 2618.8,-106.923 2631.55,-105.588 2644.16,-104.143"/>
+<polygon fill="#757575" stroke="#757575" points="2644.7,-107.603 2654.23,-102.963 2643.89,-100.651 2644.7,-107.603"/>
 </g>
 <!-- node_modules/set&#45;prop/src/index -->
 <g id="node12" class="node"><title>node_modules/set&#45;prop/src/index</title>
@@ -140,9 +135,9 @@
 <text text-anchor="middle" x="3814.63" y="-14.3" font-family="Arial" font-size="14.00" fill="#cfffac">node_modules/set&#45;prop/src/index</text>
 </g>
 <!-- dist/bundle&#45;&gt;node_modules/set&#45;prop/src/index -->
-<g id="edge15" class="edge"><title>dist/bundle&#45;&gt;node_modules/set&#45;prop/src/index</title>
-<path fill="none" stroke="#757575" d="M1464.57,-160.503C1802.32,-157.399 3558.75,-139.775 3667.63,-108 3712.79,-94.8213 3758.09,-64.1099 3786.23,-42.4652"/>
-<polygon fill="#757575" stroke="#757575" points="3788.68,-44.9922 3794.39,-36.0684 3784.36,-39.483 3788.68,-44.9922"/>
+<g id="edge14" class="edge"><title>dist/bundle&#45;&gt;node_modules/set&#45;prop/src/index</title>
+<path fill="none" stroke="#757575" d="M1632.53,-161.295C1944.9,-162.716 3467.63,-166.57 3667.63,-108 3712.78,-94.7787 3758.08,-64.0773 3786.22,-42.4464"/>
+<polygon fill="#757575" stroke="#757575" points="3788.67,-44.9754 3794.38,-36.0539 3784.35,-39.4645 3788.67,-44.9754"/>
 </g>
 <!-- node_modules/stringify&#45;anything/src/index -->
 <g id="node13" class="node"><title>node_modules/stringify&#45;anything/src/index</title>
@@ -150,24 +145,24 @@
 <text text-anchor="middle" x="182.634" y="-14.3" font-family="Arial" font-size="14.00" fill="#cfffac">node_modules/stringify&#45;anything/src/index</text>
 </g>
 <!-- dist/bundle&#45;&gt;node_modules/stringify&#45;anything/src/index -->
+<g id="edge15" class="edge"><title>dist/bundle&#45;&gt;node_modules/stringify&#45;anything/src/index</title>
+<path fill="none" stroke="#757575" d="M1520.57,-160.464C1268.64,-157.676 257.554,-143.569 201.634,-108 180.138,-94.3271 168.182,-67.1659 166.942,-46.4268"/>
+<polygon fill="#757575" stroke="#757575" points="170.446,-46.3823 167.277,-36.2723 163.449,-46.1515 170.446,-46.3823"/>
+</g>
+<!-- dist/bundle&#45;&gt;node_modules/stringify&#45;anything/src/index -->
 <g id="edge16" class="edge"><title>dist/bundle&#45;&gt;node_modules/stringify&#45;anything/src/index</title>
-<path fill="none" stroke="#757575" d="M1352.84,-160.199C1121.04,-156.394 250.104,-139.021 201.634,-108 180.177,-94.2671 168.215,-67.1146 166.963,-46.3938"/>
-<polygon fill="#757575" stroke="#757575" points="170.466,-46.3576 167.292,-36.2496 163.47,-46.131 170.466,-46.3576"/>
+<path fill="none" stroke="#757575" d="M1520.85,-160.402C1272.17,-157.472 275.152,-143.314 219.634,-108 198.04,-94.2644 186.072,-66.9165 181.508,-46.1418"/>
+<polygon fill="#757575" stroke="#757575" points="184.956,-45.538 179.818,-36.2723 178.056,-46.7196 184.956,-45.538"/>
 </g>
 <!-- dist/bundle&#45;&gt;node_modules/stringify&#45;anything/src/index -->
 <g id="edge17" class="edge"><title>dist/bundle&#45;&gt;node_modules/stringify&#45;anything/src/index</title>
-<path fill="none" stroke="#757575" d="M1352.68,-160.094C1123.58,-156.083 267.672,-138.745 219.634,-108 198.078,-94.2041 186.105,-66.8652 181.529,-46.1091"/>
-<polygon fill="#757575" stroke="#757575" points="184.978,-45.5112 179.832,-36.2496 178.079,-46.6983 184.978,-45.5112"/>
+<path fill="none" stroke="#757575" d="M1520.59,-160.327C1273.6,-157.234 292.689,-143.019 237.634,-108 215.941,-94.2017 203.963,-66.6664 195.981,-45.8576"/>
+<polygon fill="#757575" stroke="#757575" points="199.168,-44.3892 192.359,-36.2723 192.62,-46.8639 199.168,-44.3892"/>
 </g>
 <!-- dist/bundle&#45;&gt;node_modules/stringify&#45;anything/src/index -->
 <g id="edge18" class="edge"><title>dist/bundle&#45;&gt;node_modules/stringify&#45;anything/src/index</title>
-<path fill="none" stroke="#757575" d="M1352.85,-159.983C1126.26,-155.77 285.24,-138.469 237.634,-108 215.98,-94.1411 203.996,-66.6153 196.002,-45.8251"/>
-<polygon fill="#757575" stroke="#757575" points="199.19,-44.3604 192.373,-36.2496 192.644,-46.8409 199.19,-44.3604"/>
-</g>
-<!-- dist/bundle&#45;&gt;node_modules/stringify&#45;anything/src/index -->
-<g id="edge19" class="edge"><title>dist/bundle&#45;&gt;node_modules/stringify&#45;anything/src/index</title>
-<path fill="none" stroke="#757575" d="M1352.95,-159.857C1128.13,-155.436 302.781,-138.175 255.634,-108 233.557,-93.8705 221.531,-65.5349 209.866,-44.6149"/>
-<polygon fill="#757575" stroke="#757575" points="212.796,-42.6944 204.68,-35.8848 206.778,-46.2698 212.796,-42.6944"/>
+<path fill="none" stroke="#757575" d="M1520.62,-160.246C1275.16,-156.994 310.226,-142.725 255.634,-108 233.517,-93.9322 221.499,-65.5857 209.846,-44.6463"/>
+<polygon fill="#757575" stroke="#757575" points="212.776,-42.7244 204.665,-35.9072 206.754,-46.2941 212.776,-42.7244"/>
 </g>
 <!-- node_modules/type&#45;check/lib/index -->
 <g id="node14" class="node"><title>node_modules/type&#45;check/lib/index</title>
@@ -175,9 +170,9 @@
 <text text-anchor="middle" x="3040.63" y="-86.3" font-family="Arial" font-size="14.00" fill="#cfffac">node_modules/type&#45;check/lib/index</text>
 </g>
 <!-- dist/bundle&#45;&gt;node_modules/type&#45;check/lib/index -->
-<g id="edge20" class="edge"><title>dist/bundle&#45;&gt;node_modules/type&#45;check/lib/index</title>
-<path fill="none" stroke="#757575" d="M1464.33,-160.323C1658.87,-157.672 2326.16,-146.19 2875.63,-108 2890.95,-106.935 2907.05,-105.577 2922.93,-104.093"/>
-<polygon fill="#757575" stroke="#757575" points="2923.71,-107.535 2933.33,-103.101 2923.04,-100.566 2923.71,-107.535"/>
+<g id="edge19" class="edge"><title>dist/bundle&#45;&gt;node_modules/type&#45;check/lib/index</title>
+<path fill="none" stroke="#757575" d="M1632.41,-159.958C1812.55,-156.329 2394.99,-142.533 2875.63,-108 2890.83,-106.908 2906.8,-105.541 2922.56,-104.06"/>
+<polygon fill="#757575" stroke="#757575" points="2923.26,-107.509 2932.88,-103.072 2922.59,-100.541 2923.26,-107.509"/>
 </g>
 <!-- src/index -->
 <g id="node15" class="node"><title>src/index</title>
@@ -185,22 +180,22 @@
 <text text-anchor="middle" x="3610.63" y="-86.3" font-family="Arial" font-size="14.00" fill="#c6c5fe">src/index</text>
 </g>
 <!-- dist/bundle&#45;&gt;src/index -->
-<g id="edge21" class="edge"><title>dist/bundle&#45;&gt;src/index</title>
-<path fill="none" stroke="#757575" d="M1464.34,-160.429C1780,-157.085 3337.33,-139.112 3548.63,-108 3554.09,-107.197 3559.74,-106.072 3565.32,-104.778"/>
-<polygon fill="#757575" stroke="#757575" points="3566.36,-108.125 3575.21,-102.3 3564.66,-101.334 3566.36,-108.125"/>
+<g id="edge20" class="edge"><title>dist/bundle&#45;&gt;src/index</title>
+<path fill="none" stroke="#757575" d="M1632.94,-161.313C1913.75,-162.598 3164.54,-164.967 3548.63,-108 3554.08,-107.191 3559.74,-106.062 3565.32,-104.767"/>
+<polygon fill="#757575" stroke="#757575" points="3566.36,-108.113 3575.21,-102.287 3564.66,-101.323 3566.36,-108.113"/>
 </g>
 <!-- src/index&#45;&gt;node_modules/fun&#45;unfold/src/index -->
-<g id="edge23" class="edge"><title>src/index&#45;&gt;node_modules/fun&#45;unfold/src/index</title>
+<g id="edge22" class="edge"><title>src/index&#45;&gt;node_modules/fun&#45;unfold/src/index</title>
 <path fill="none" stroke="#757575" d="M3585.98,-74.496C3569.48,-64.7911 3547.46,-51.8402 3528.85,-40.8903"/>
 <polygon fill="#757575" stroke="#757575" points="3530.42,-37.7521 3520.02,-35.6986 3526.87,-43.7857 3530.42,-37.7521"/>
 </g>
 <!-- src/index&#45;&gt;node_modules/set&#45;prop/src/index -->
-<g id="edge24" class="edge"><title>src/index&#45;&gt;node_modules/set&#45;prop/src/index</title>
+<g id="edge23" class="edge"><title>src/index&#45;&gt;node_modules/set&#45;prop/src/index</title>
 <path fill="none" stroke="#757575" d="M3644.78,-77.2836C3675.6,-66.7081 3721.54,-50.9423 3757.88,-38.4737"/>
 <polygon fill="#757575" stroke="#757575" points="3759.05,-41.7723 3767.38,-35.2161 3756.78,-35.1512 3759.05,-41.7723"/>
 </g>
 <!-- src/index&#45;&gt;node_modules/stringify&#45;anything/src/index -->
-<g id="edge25" class="edge"><title>src/index&#45;&gt;node_modules/stringify&#45;anything/src/index</title>
+<g id="edge24" class="edge"><title>src/index&#45;&gt;node_modules/stringify&#45;anything/src/index</title>
 <path fill="none" stroke="#757575" d="M3570.15,-80.272C3553.37,-77.0413 3533.65,-73.7433 3515.63,-72 3203.89,-41.8272 1036.05,-24.785 374.131,-20.2422"/>
 <polygon fill="#757575" stroke="#757575" points="374.042,-16.7416 364.018,-20.1729 373.994,-23.7414 374.042,-16.7416"/>
 </g>
@@ -210,7 +205,7 @@
 <text text-anchor="middle" x="3610.63" y="-158.3" font-family="Arial" font-size="14.00" fill="#c6c5fe">dist/entry</text>
 </g>
 <!-- dist/entry&#45;&gt;src/index -->
-<g id="edge22" class="edge"><title>dist/entry&#45;&gt;src/index</title>
+<g id="edge21" class="edge"><title>dist/entry&#45;&gt;src/index</title>
 <path fill="none" stroke="#757575" d="M3610.63,-143.697C3610.63,-135.983 3610.63,-126.712 3610.63,-118.112"/>
 <polygon fill="#757575" stroke="#757575" points="3614.13,-118.104 3610.63,-108.104 3607.13,-118.104 3614.13,-118.104"/>
 </g>
