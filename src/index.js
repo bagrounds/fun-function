@@ -48,7 +48,11 @@
 
     return setProp('name', partialName(f, args),
       setProp('length', arity, function () {
-        var newArgs = args.concat(Array.prototype.slice.call(arguments))
+        var newPartialArgs = Array.prototype.slice.call(arguments)
+
+        var newArgs = args.concat(
+          newPartialArgs.length ? newPartialArgs : [undefined]
+        )
 
         return newArgs.length >= arity
           ? f.apply(null, newArgs)
