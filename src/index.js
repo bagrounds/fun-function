@@ -12,6 +12,7 @@
 
   /* exports */
   module.exports = {
+    transfer: curry(transfer),
     dimap: curry(dimap),
     map: curry(map),
     contramap: curry(contramap),
@@ -30,6 +31,35 @@
     apply: curry(apply),
     applyFrom: curry(applyFrom),
     curry: curry
+  }
+
+  /**
+   *
+   * @function module:fun-function.transfer
+   *
+   * @param {Array|Object} functions - of functions to apply to source
+   * @param {*} source - to get values from
+   *
+   * @return {Array|Object} results of functions applied to source
+   */
+  function transfer (functions, source) {
+    return functions instanceof Array
+      ? transferToArray(functions, source)
+      : transferToObject(functions, source)
+
+    function transferToObject (functions, source) {
+      return Object.keys(functions).reduce(function (result, key) {
+        result[key] = functions[key](source)
+
+        return result
+      }, {})
+    }
+
+    function transferToArray (functions, source) {
+      return functions.map(function (f) {
+        return f(source)
+      })
+    }
   }
 
   /**
