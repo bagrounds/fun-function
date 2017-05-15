@@ -22,6 +22,37 @@
 
   var tests = [
     [
+      [scalar.sub],
+      compose(
+        predicate.equal(-4),
+        compose(
+          apply([6, 12]),
+          apply([scalar.sub, scalar.div])
+        )
+      ),
+      'lift'
+    ],
+    [
+      [scalar.sub],
+      compose(
+        predicate.equal(-1),
+        compose(
+          apply([6]),
+          apply([scalar.div(2), scalar.div(3)])
+        )
+      ),
+      'lift'
+    ],
+    [
+      [scalar.sub],
+      compose(
+        predicate.type('Function'),
+        apply([scalar.div(2), scalar.div(3)])
+      ),
+      'lift'
+    ],
+    [[scalar.sub], predicate.type('Function'), 'lift'],
+    [
       [3, scalar.dot(2), 3],
       predicate.equal(24),
       'iterate'

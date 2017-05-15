@@ -6,6 +6,7 @@
   'use strict'
 
   /* imports */
+  var funCurry = require('fun-curry')
   var stringify = require('stringify-anything')
   var unfold = require('fun-unfold')
   var setProp = require('set-prop')
@@ -30,7 +31,31 @@
     iterate: curry(iterate),
     apply: curry(apply),
     applyFrom: curry(applyFrom),
-    curry: curry
+    curry: curry,
+    lift: lift
+  }
+
+  /**
+   * Lift a function to operate on the results of other functions
+   *
+   * @function module:fun-function.lift
+   *
+   * @param {Function} f - (a, b, ...) -> z
+   *
+   * @return {Function} ((-> a), (-> b), ...) -> (-> z)
+   */
+  function lift (f) {
+    return curry(setProp('name', 'lift(' + stringify(f) + ')', function () {
+      var fs = Array.prototype.slice.call(arguments, 0, f.length)
+
+      var n = 'lift(' + stringify(f) + ')(' + fs.map(stringify).join(',') + ')'
+
+      return curry(setProp('name', n, function () {
+        var args = Array.prototype.slice.call(arguments)
+
+        return apply(fs.map(curry(apply)(args)), f)
+      }), fs[0].length)
+    }), f.length)
   }
 
   /**
@@ -73,26 +98,7 @@
    * @return {Function} a_1 -> a_2 -> ... -> a_arity -> f(a_1, ..., a_arity)
    */
   function curry (f, arity, args) {
-    arity = arity || f.length
-    args = args || []
-
-    return setProp('name', partialName(f, args),
-      setProp('length', arity, function () {
-        var newPartialArgs = Array.prototype.slice.call(arguments)
-
-        var newArgs = args.concat(
-          newPartialArgs.length ? newPartialArgs : [undefined]
-        )
-
-        return newArgs.length >= arity
-          ? f.apply(null, newArgs)
-          : setProp('length', arity - newArgs.length, curry(f, arity, newArgs))
-      })
-    )
-
-    function partialName (f, args) {
-      return stringify(f) + '(' + stringify(args) + ')'
-    }
+    return funCurry(f, arity, args)
   }
 
   /**
