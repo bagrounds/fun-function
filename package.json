@@ -11,7 +11,7 @@
     "predependencies": "mkdir -p img",
     "dependencies": "madge src --image img/dependencies.svg -x 'public|test|coverage|docs' --include-npm",
     "postdependencies": "npm run dependencies-test",
-    "dependencies-test": "madge . --image img/dependencies-test.svg -x 'public|coverage|docs' --include-npm",
+    "dependencies-test": "madge . --image img/dependencies-test.svg -x 'dist|public|coverage|docs' --include-npm",
     "pages-index": "showdown makehtml -i README.md -o public/index.html",
     "pages": "./script/pages.sh",
     "lint": "eslint --ignore-path .gitignore --fix . --ignore-pattern dist",
