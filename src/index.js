@@ -16,7 +16,7 @@
   const setLength = (length, f) => setProp('length', length, f)
   const oSet = (k, v, o) => Object.assign(o, { [k]: v })
   const oMap = (f, o) => Object.keys(o)
-    .reduce((r, k) => oSet(k, o[k], r), {})
+    .reduce((r, k) => oSet(k, f(o[k]), r), {})
   const oAp = (fs, o) => Object.keys(o)
     .reduce((r, k) => oSet(k, (fs[k] || (x => x))(o[k]), r), {})
 
@@ -273,7 +273,7 @@
 
   const api = { transfer, dimap, map, contramap, compose, composeAll, k, id,
     tee, arg, args, reArg, flip, argsToArray, argsToObject, iterate, apply,
-    applyFrom, curry, lift }
+    applyFrom, lift }
 
   const ap = fs => as => as.map((x, i) => fs[i](x))
   const isType = t => x => typeof x === t
@@ -313,6 +313,6 @@
   }
 
   /* exports */
-  module.exports = oMap(curry, oAp(guards, api))
+  module.exports = oSet('curry', curry, oMap(funCurry, oAp(guards, api)))
 })()
 
