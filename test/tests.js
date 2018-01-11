@@ -103,8 +103,8 @@
       'flip'
     ],
     [
-      ['ignored'],
-      compose(predicate.equalDeep(['a', 3]), apply(['a', 3])),
+      ['a', 3],
+      predicate.equalDeep(['a', 3]),
       'args'
     ],
     [

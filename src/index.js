@@ -2,38 +2,23 @@
  *
  * @module fun-function
  */
-;(function () {
+;(() => {
   'use strict'
 
   /* imports */
-  var funCurry = require('fun-curry')
-  var stringify = require('stringify-anything')
-  var unfold = require('fun-unfold')
-  var setProp = require('set-prop')
+  const funCurry = require('fun-curry')
+  const stringify = require('stringify-anything')
+  const unfold = require('fun-unfold')
+  const setProp = require('set-prop')
+  const { inputs } = require('guarded')
 
-  /* exports */
-  module.exports = {
-    transfer: curry(transfer),
-    dimap: curry(dimap),
-    map: curry(map),
-    contramap: curry(contramap),
-    compose: curry(compose),
-    composeAll: composeAll,
-    k: k,
-    id: id,
-    tee: curry(tee),
-    arg: arg,
-    args: args,
-    reArg: curry(reArg),
-    flip: flip,
-    argsToArray: argsToArray,
-    argsToObject: curry(argsToObject),
-    iterate: curry(iterate),
-    apply: curry(apply),
-    applyFrom: curry(applyFrom),
-    curry: curry,
-    lift: lift
-  }
+  const setName = (name, f) => setProp('name', name, f)
+  const setLength = (length, f) => setProp('length', length, f)
+  const oSet = (k, v, o) => Object.assign(o, { [k]: v })
+  const oMap = (f, o) => Object.keys(o)
+    .reduce((r, k) => oSet(k, o[k], r), {})
+  const oAp = (fs, o) => Object.keys(o)
+    .reduce((r, k) => oSet(k, (fs[k] || (x => x))(o[k]), r), {})
 
   /**
    * Lift a function to operate on the results of other functions
@@ -44,48 +29,32 @@
    *
    * @return {Function} ((-> a), (-> b), ...) -> (-> z)
    */
-  function lift (f) {
-    return curry(setProp('name', 'lift(' + stringify(f) + ')', function () {
-      var fs = Array.prototype.slice.call(arguments, 0, f.length)
-
-      var n = 'lift(' + stringify(f) + ')(' + fs.map(stringify).join(',') + ')'
-
-      return curry(setProp('name', n, function () {
-        var args = Array.prototype.slice.call(arguments)
-
-        return apply(fs.map(curry(apply)(args)), f)
-      }), fs[0].length)
-    }), f.length)
-  }
+  const lift = f => curry(
+    setName(
+      `lift(${stringify(f)})`,
+      (...fs) => curry(
+        setName(
+          `lift(${stringify(f)})(${fs.map(stringify).join(',')})`,
+          (...args) => apply(fs.slice(0, f.length).map(curry(apply)(args)), f)
+        ),
+        fs[0].length
+      )
+    ),
+    f.length
+  )
 
   /**
    *
    * @function module:fun-function.transfer
    *
-   * @param {Array|Object} functions - of functions to apply to source
-   * @param {*} source - to get values from
+   * @param {Array|Object} fs - functions to apply to source
+   * @param {*} s - source to get values from
    *
    * @return {Array|Object} results of functions applied to source
    */
-  function transfer (functions, source) {
-    return functions instanceof Array
-      ? transferToArray(functions, source)
-      : transferToObject(functions, source)
-
-    function transferToObject (functions, source) {
-      return Object.keys(functions).reduce(function (result, key) {
-        result[key] = functions[key](source)
-
-        return result
-      }, {})
-    }
-
-    function transferToArray (functions, source) {
-      return functions.map(function (f) {
-        return f(source)
-      })
-    }
-  }
+  const transfer = (fs, s) => fs instanceof Array
+    ? fs.map(f => f(s))
+    : Object.keys(fs).reduce((r, k) => oSet(k, fs[k](s), r), {})
 
   /**
    *
@@ -97,9 +66,7 @@
    *
    * @return {Function} a_1 -> a_2 -> ... -> a_arity -> f(a_1, ..., a_arity)
    */
-  function curry (f, arity, args) {
-    return funCurry(f, arity, args)
-  }
+  const curry = funCurry
 
   /**
    * Warning: this function can't always set the length of the returned function
@@ -118,17 +85,10 @@
    *
    * @return {Function} tArgs -> z
    */
-  function reArg (t, f) {
-    return setProp(
-      'length',
-      t.length,
-      setProp('name', t.name + '(' + f.name + ')', result)
-    )
-
-    function result () {
-      return apply(t(Array.prototype.slice.call(arguments)), f)
-    }
-  }
+  const reArg = (t, f) => setLength(
+    t.length,
+    setName(`${t.name}(${f.name})`, (...args) => apply(t(args), f))
+  )
 
   /**
    *
@@ -138,13 +98,7 @@
    *
    * @return {Function} (an, ..., a2, a1) -> z
    */
-  function flip (f) {
-    return setProp('length', f.length, reArg(reverse, f))
-
-    function reverse (args) {
-      return args.map(id).reverse()
-    }
-  }
+  const flip = f => setLength(f.length, reArg(a => a.map(id).reverse(), f))
 
   /**
    *
@@ -154,13 +108,7 @@
    *
    * @return {Function} ([a1, a2, ..., an]) -> z
    */
-  function argsToArray (f) {
-    return reArg(toArray, f)
-
-    function toArray (args) {
-      return args[0]
-    }
-  }
+  const argsToArray = f => reArg(([a]) => a, f)
 
   /**
    *
@@ -171,15 +119,7 @@
    *
    * @return {Function} ({k1: a1, k2: a2, ..., kn: an}) -> z
    */
-  function argsToObject (keys, f) {
-    return reArg(toObject, f)
-
-    function toObject (object) {
-      return keys.map(function (key) {
-        return object[0][key]
-      })
-    }
-  }
+  const argsToObject = (keys, f) => reArg(args => keys.map(k => args[0][k]), f)
 
   /**
    *
@@ -187,11 +127,7 @@
    *
    * @return {Function} that returns its arguments as an array
    */
-  function args () {
-    return function args () {
-      return Array.prototype.slice.call(arguments)
-    }
-  }
+  const args = (...args) => args
 
   /**
    *
@@ -201,11 +137,7 @@
    *
    * @return {Function} that returns its nth argument
    */
-  function arg (n) {
-    return function () {
-      return arguments[n]
-    }
-  }
+  const arg = n => compose(o => o[n], args)
 
   /**
    *
@@ -218,9 +150,7 @@
    *
    * @return {*} result of f(source)(...inputs(source))
    */
-  function applyFrom (options, source) {
-    return apply(options.inputs(source), options.f(source))
-  }
+  const applyFrom = ({inputs, f}, source) => lift(apply)(inputs, f)(source)
 
   /**
    *
@@ -231,9 +161,7 @@
    *
    * @return {Function} result of f(...args)
    */
-  function apply (args, f) {
-    return f.apply(null, args)
-  }
+  const apply = (args, f) => f.apply(null, args)
 
   /**
    *
@@ -245,17 +173,38 @@
    *
    * @return {Function} f(f(...f(x)...)) (f applied to x n times)
    */
-  function iterate (n, f, x) {
-    return unfold(next, stop, [0, x])[1]
+  const iterate = (n, f, x) => unfold(
+    pair => [pair[0] + 1, f(pair[1])],
+    pair => pair[0] >= n,
+    [0, x]
+  )[1]
 
-    function next (pair) {
-      return [pair[0] + 1, f(pair[1])]
-    }
+  /**
+   *
+   * @function module:fun-function.compose
+   *
+   * @param {Function} f - a unary function
+   * @param {Function} g - an N-ary function
+   *
+   * @return {Function} (f . g) - the N-ary function composition of f and g
+   */
+  const compose = (f, g) => setLength(
+    g.length,
+    setName(
+      `${stringify(f)}.${stringify(g)}`,
+      (...args) => f(apply(args, g))
+    )
+  )
 
-    function stop (pair) {
-      return pair[0] >= n
-    }
-  }
+  /**
+   *
+   * @function module:fun-function.composeAll
+   *
+   * @param {Array<Function>} fs - [y -> z, ..., b -> c, a -> b]
+   *
+   * @return {Function} a -> z
+   */
+  const composeAll = fs => fs.reduce(compose, id)
 
   /**
    *
@@ -266,9 +215,7 @@
    *
    * @return {Function} source.f
    */
-  function map (f, source) {
-    return compose(f, source)
-  }
+  const map = compose
 
   /**
    *
@@ -279,9 +226,7 @@
    *
    * @return {Function} source.f
    */
-  function contramap (f, source) {
-    return compose(source, f)
-  }
+  const contramap = flip(map)
 
   /**
    *
@@ -293,39 +238,7 @@
    *
    * @return {Function} g.source.f
    */
-  function dimap (f, g, source) {
-    return composeAll([g, source, f])
-  }
-
-  /**
-   *
-   * @function module:fun-function.compose
-   *
-   * @param {Function} f - a unary function
-   * @param {Function} g - an N-ary function
-   *
-   * @return {Function} (f . g) - the N-ary function composition of f and g
-   */
-  function compose (f, g) {
-    return setProp(
-      'length',
-      g.length,
-      setProp('name', stringify(f) + '.' + stringify(g), function () {
-        return f(g.apply(null, arguments))
-      }))
-  }
-
-  /**
-   *
-   * @function module:fun-function.composeAll
-   *
-   * @param {Array<Function>} functions - [y -> z, ..., b -> c, a -> b]
-   *
-   * @return {Function} a -> z
-   */
-  function composeAll (functions) {
-    return functions.reduce(compose, id)
-  }
+  const dimap = (f, g, source) => composeAll([g, source, f])
 
   /**
    *
@@ -335,9 +248,7 @@
    *
    * @return {*} a
    */
-  function id (a) {
-    return a
-  }
+  const id = a => a
 
   /**
    *
@@ -348,11 +259,7 @@
    *
    * @return {*} x
    */
-  function tee (f, x) {
-    f(x)
-
-    return x
-  }
+  const tee = (f, x) => { f(x); return x }
 
   /**
    *
@@ -362,10 +269,50 @@
    *
    * @return {Function} * -> a
    */
-  function k (a) {
-    return function () {
-      return a
-    }
+  const k = a => () => a
+
+  const api = { transfer, dimap, map, contramap, compose, composeAll, k, id,
+    tee, arg, args, reArg, flip, argsToArray, argsToObject, iterate, apply,
+    applyFrom, curry, lift }
+
+  const ap = fs => as => as.map((x, i) => fs[i](x))
+  const isType = t => x => typeof x === t
+  const isFun = isType('function')
+  const isNum = isType('number')
+  const isObj = o => o instanceof Object
+  const isArray = a => a instanceof Array
+  const all = a => a.reduce((a, b) => a && b, true)
+  const allF = f => a => all(a.map(f))
+  const arrayOf = p => a => isArray(a) && allF(p)(a)
+  const objOf = p => o => isObj(o) && all(Object.keys(o).map(k => p(o[k])))
+  const isVector = n => a => isArray(a) && a.length === n
+  const vectorOf = n => p => a => isVector(n)(a) && arrayOf(p)(a)
+  const tuple = ps => as => as.length === ps.length && all(ap(ps)(as))
+  const any = () => true
+  const or = (f, g) => x => f(x) || g(x)
+  const nFuns = n => vectorOf(n)(isFun)
+
+  const guards = {
+    transfer: inputs(tuple([or(arrayOf(isFun), objOf(isFun)), any])),
+    dimap: inputs(nFuns(3)),
+    map: inputs(nFuns(2)),
+    contramap: inputs(nFuns(2)),
+    compose: inputs(nFuns(2)),
+    composeAll: inputs(tuple([arrayOf(isFun)])),
+    tee: inputs(tuple([isFun, any])),
+    arg: inputs(tuple([isNum])),
+    reArg: inputs(nFuns(2)),
+    flip: inputs(nFuns(1)),
+    argsToArray: inputs(nFuns(1)),
+    argsToObject: inputs(tuple([isArray, isFun])),
+    iterate: inputs(tuple([isNum, isFun, any])),
+    apply: inputs(tuple([isArray, isFun])),
+    curry: inputs(nFuns(1)),
+    applyFrom: inputs(tuple([isObj, any])),
+    lift: inputs(nFuns(1))
   }
+
+  /* exports */
+  module.exports = oMap(curry, oAp(guards, api))
 })()
 
