@@ -1,187 +1,216 @@
-;(function () {
+;(() => {
   'use strict'
 
   /* imports */
-  var predicate = require('fun-predicate')
-  var object = require('fun-object')
-  var funTest = require('fun-test')
-  var arrange = require('fun-arrange')
-  var array = require('fun-array')
-  var scalar = require('fun-scalar')
-  var compose = require('fun-compose')
-  var apply = require('fun-apply')
+  const { equal, equalDeep } = require('fun-predicate')
+  const { fun } = require('fun-type')
+  const { ap, get } = require('fun-object')
+  const { sync } = require('fun-test')
+  const arrange = require('fun-arrange')
+  const { of, take, repeat, concat } = require('fun-array')
+  const { sub, div, mul, add } = require('fun-scalar')
+  const compose = require('fun-compose')
+  const apply = require('fun-apply')
 
-  var equalityTests = [
+  const equalityTests = [
     [[9], 9, 'id'],
     [[{}], {}, 'id']
   ].map(arrange({ inputs: 0, predicate: 1, contra: 2 }))
-    .map(object.ap({
-      predicate: predicate.equalDeep,
-      contra: object.get
+    .map(ap({
+      predicate: equalDeep,
+      contra: get
     }))
 
-  var tests = [
+  const tests = [
     [
-      [scalar.sub],
+      [sub],
       compose(
-        predicate.equal(-4),
+        equal(-4),
         compose(
           apply([6, 12]),
-          apply([scalar.sub, scalar.div])
+          apply([sub, div])
         )
       ),
       'lift'
     ],
     [
-      [scalar.sub],
+      [sub],
       compose(
-        predicate.equal(-1),
+        equal(-1),
         compose(
           apply([6]),
-          apply([scalar.div(2), scalar.div(3)])
+          apply([div(2), div(3)])
         )
       ),
       'lift'
     ],
     [
-      [scalar.sub],
+      [sub],
       compose(
-        predicate.type('Function'),
-        apply([scalar.div(2), scalar.div(3)])
+        fun,
+        apply([div(2), div(3)])
       ),
       'lift'
     ],
-    [[scalar.sub], predicate.type('Function'), 'lift'],
+    [[sub], fun, 'lift'],
     [
-      [3, scalar.dot(2), 3],
-      predicate.equal(24),
+      [3, mul(2), 3],
+      equal(24),
       'iterate'
     ],
     [
-      [array.of],
-      compose(predicate.equalDeep([undefined]), apply([])),
+      [of],
+      compose(equalDeep([undefined]), apply([])),
       'curry'
     ],
     [
       [Math.pow],
-      compose(predicate.equal(8), apply([2, 3])),
+      compose(equal(8), apply([2, 3])),
       'curry'
     ],
     [
       [Math.pow],
-      compose(predicate.type('Function'), apply([3])),
+      compose(fun, apply([3])),
       'curry'
     ],
     [
-      [{ inputs: array.take(1), f: array.get(1) }, [3, scalar.sum(4)]],
-      predicate.equal(7),
+      [{ inputs: take(1), f: get(1) }, [3, add(4)]],
+      equal(7),
       'applyFrom'
     ],
     [
-      [[1, 2], scalar.sub],
-      predicate.equal(1),
+      [[1, 2], sub],
+      equal(1),
       'apply'
     ],
     [
-      [compose(array.repeat(2), array.get(0)), scalar.sub],
-      compose(predicate.equal(0), apply([7, 4])),
+      [compose(repeat(2), get(0)), sub],
+      compose(equal(0), apply([7, 4])),
       'reArg'
     ],
     [
-      [['a', 'b'], scalar.sub],
-      compose(predicate.equal(-3), apply([{ a: 7, b: 4 }])),
+      [['a', 'b'], sub],
+      compose(equal(-3), apply([{ a: 7, b: 4 }])),
       'argsToObject'
     ],
     [
-      [scalar.sub],
-      compose(predicate.equal(-3), apply([[7, 4]])),
+      [sub],
+      compose(equal(-3), apply([[7, 4]])),
       'argsToArray'
     ],
     [
-      [scalar.sub],
-      compose(predicate.equal(3), apply([7, 4])),
+      [sub],
+      compose(equal(3), apply([7, 4])),
       'flip'
     ],
     [
       ['a', 3],
-      predicate.equalDeep(['a', 3]),
+      equalDeep(['a', 3]),
       'args'
     ],
     [
       [2],
-      compose(predicate.equal(true), apply(['0', 7, true])),
+      compose(equal(true), apply(['0', 7, true])),
       'arg'
     ],
     [
       [1],
-      compose(predicate.equal(7), apply(['0', 7, true])),
+      compose(equal(7), apply(['0', 7, true])),
       'arg'
     ],
     [
       [0],
-      compose(predicate.equal('0'), apply(['0', 1, true])),
+      compose(equal('0'), apply(['0', 1, true])),
       'arg'
     ],
     [
-      [scalar.sum(99), 4],
-      predicate.equal(4),
+      [add(99), 4],
+      equal(4),
       'tee'
     ],
     [
       [6],
-      predicate.equal(6),
+      equal(6),
       'id'
     ],
     [
       [6],
-      compose(predicate.equal(6), apply(['anything'])),
+      compose(equal(6), apply(['anything'])),
       'k'
     ],
     [
-      [{ a: scalar.sum(2), b: scalar.dot(2) }, 3],
-      predicate.equalDeep({ a: 5, b: 6 }),
+      [{ a: add(2), b: mul(2) }, 3],
+      equalDeep({ a: 5, b: 6 }),
       'transfer'
     ],
     [
-      [[scalar.sum(2), scalar.dot(2)], 3],
-      predicate.equalDeep([5, 6]),
+      [[add(2), mul(2)], 3],
+      equalDeep([5, 6]),
       'transfer'
     ],
     [
-      [scalar.sum(2), scalar.dot(3)],
-      compose(predicate.equal(5), apply([1])),
+      [add(2), mul(3)],
+      compose(equal(5), apply([1])),
       'compose'
     ],
     [
-      [[scalar.sum(2), scalar.dot(3)]],
-      compose(predicate.equal(5), apply([1])),
+      [[]],
+      compose(equal(1), apply([1])),
       'composeAll'
     ],
     [
-      [scalar.sum(2), scalar.dot(3)],
-      compose(predicate.equal(5), apply([1])),
+      [[add(2)]],
+      compose(equal(3), apply([1])),
+      'composeAll'
+    ],
+    [
+      [[add(2), mul(3)]],
+      compose(equal(5), apply([1])),
+      'composeAll'
+    ],
+    [
+      [add(2), mul(3)],
+      compose(equal(9), apply([1])),
+      'pipe'
+    ],
+    [
+      [[]],
+      compose(equal(1), apply([1])),
+      'pipeAll'
+    ],
+    [
+      [[add(2)]],
+      compose(equal(3), apply([1])),
+      'pipeAll'
+    ],
+    [
+      [[add(2), mul(3)]],
+      compose(equal(9), apply([1])),
+      'pipeAll'
+    ],
+    [
+      [add(2), mul(3)],
+      compose(equal(5), apply([1])),
       'map'
     ],
     [
-      [scalar.sum(2), scalar.dot(3)],
-      compose(predicate.equal(9), apply([1])),
+      [add(2), mul(3)],
+      compose(equal(9), apply([1])),
       'contramap'
     ],
     [
-      [scalar.sum(2), scalar.dot(3), scalar.sum(-2)],
-      compose(predicate.equal(3), apply([1])),
+      [add(2), mul(3), add(-2)],
+      compose(equal(3), apply([1])),
       'dimap'
     ]
   ].map(arrange({ inputs: 0, predicate: 1, contra: 2 }))
-    .map(object.ap({
-      contra: object.get
-    }))
+    .map(ap({ contra: get }))
 
   /* exports */
   module.exports = [
     equalityTests,
     tests
-  ].reduce(array.concat, [])
-    .map(funTest.sync)
+  ].reduce(concat, [])
+    .map(sync)
 })()
 

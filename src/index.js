@@ -11,6 +11,8 @@
   const unfold = require('fun-unfold')
   const setProp = require('set-prop')
   const { inputs } = require('guarded')
+  const { array, object, fun, num, vectorOf, tuple, arrayOf, objectOf, any,
+    vector } = require('fun-type')
 
   const setName = (name, f) => setProp('name', name, f)
   const setLength = (length, f) => setProp('length', length, f)
@@ -35,7 +37,7 @@
       (...fs) => curry(
         setName(
           `lift(${stringify(f)})(${fs.map(stringify).join(',')})`,
-          (...args) => apply(fs.slice(0, f.length).map(curry(apply)(args)), f)
+          (...args) => f(...fs.slice(0, f.length).map(f => f(...args)))
         ),
         fs[0].length
       )
@@ -87,7 +89,7 @@
    */
   const reArg = (t, f) => setLength(
     t.length,
-    setName(`${t.name}(${f.name})`, (...args) => apply(t(args), f))
+    setName(`${stringify(t)}(${stringify(f)})`, (...args) => f(...t(args)))
   )
 
   /**
@@ -119,7 +121,7 @@
    *
    * @return {Function} ({k1: a1, k2: a2, ..., kn: an}) -> z
    */
-  const argsToObject = (keys, f) => reArg(args => keys.map(k => args[0][k]), f)
+  const argsToObject = (keys, f) => reArg(([o]) => keys.map(k => o[k]), f)
 
   /**
    *
@@ -161,7 +163,7 @@
    *
    * @return {Function} result of f(...args)
    */
-  const apply = (args, f) => f.apply(null, args)
+  const apply = (args, f) => f(...args)
 
   /**
    *
@@ -174,8 +176,8 @@
    * @return {Function} f(f(...f(x)...)) (f applied to x n times)
    */
   const iterate = (n, f, x) => unfold(
-    pair => [pair[0] + 1, f(pair[1])],
-    pair => pair[0] >= n,
+    ([i, x]) => [i + 1, f(x)],
+    ([i]) => i >= n,
     [0, x]
   )[1]
 
@@ -186,13 +188,13 @@
    * @param {Function} f - a unary function
    * @param {Function} g - an N-ary function
    *
-   * @return {Function} (f . g) - the N-ary function composition of f and g
+   * @return {Function} (f <<< g) - N-ary, right-to-left composition of f and g
    */
   const compose = (f, g) => setLength(
     g.length,
     setName(
-      `${stringify(f)}.${stringify(g)}`,
-      (...args) => f(apply(args, g))
+      `${stringify(f)} <<< ${stringify(g)}`,
+      (...args) => f(g(...args))
     )
   )
 
@@ -204,7 +206,36 @@
    *
    * @return {Function} a -> z
    */
-  const composeAll = fs => fs.reduce(compose, id)
+  const composeAll = fs =>
+    fs.length === 0 ? id : fs.length === 1 ? fs[0] : fs.reduce(compose)
+
+  /**
+   *
+   * @function module:fun-function.pipe
+   *
+   * @param {Function} f - an N-ary function
+   * @param {Function} g - a unary function
+   *
+   * @return {Function} (f >>> g) - N-ary, left-to-right composition of f and g
+   */
+  const pipe = (f, g) => setLength(
+    g.length,
+    setName(
+      `${stringify(f)} >>> ${stringify(g)}`,
+      (...args) => g(f(...args))
+    )
+  )
+
+  /**
+   *
+   * @function module:fun-function.pipeAll
+   *
+   * @param {Array<Function>} fs - [a -> b, b -> c, ..., y -> z]
+   *
+   * @return {Function} a -> z
+   */
+  const pipeAll = fs =>
+    fs.length === 0 ? id : fs.length === 1 ? fs[0] : fs.reduce(pipe)
 
   /**
    *
@@ -266,50 +297,38 @@
    * @function module:fun-function.k
    *
    * @param {*} a - anything
+   * @param {*} b - anything
    *
-   * @return {Function} * -> a
+   * @return {*} a
    */
-  const k = a => () => a
+  const k = (a, b) => a
 
   const api = { transfer, dimap, map, contramap, compose, composeAll, k, id,
     tee, arg, args, reArg, flip, argsToArray, argsToObject, iterate, apply,
-    applyFrom, lift }
+    applyFrom, lift, pipe, pipeAll }
 
-  const ap = fs => as => as.map((x, i) => fs[i](x))
-  const isType = t => x => typeof x === t
-  const isFun = isType('function')
-  const isNum = isType('number')
-  const isObj = o => o instanceof Object
-  const isArray = a => a instanceof Array
-  const all = a => a.reduce((a, b) => a && b, true)
-  const allF = f => a => all(a.map(f))
-  const arrayOf = p => a => isArray(a) && allF(p)(a)
-  const objOf = p => o => isObj(o) && all(Object.keys(o).map(k => p(o[k])))
-  const isVector = n => a => isArray(a) && a.length === n
-  const vectorOf = n => p => a => isVector(n)(a) && arrayOf(p)(a)
-  const tuple = ps => as => as.length === ps.length && all(ap(ps)(as))
-  const any = () => true
   const or = (f, g) => x => f(x) || g(x)
-  const nFuns = n => vectorOf(n)(isFun)
+  const nFuns = n => vectorOf(n)(fun)
 
   const guards = {
-    transfer: inputs(tuple([or(arrayOf(isFun), objOf(isFun)), any])),
+    transfer: inputs(tuple([or(arrayOf(fun), objectOf(fun)), any])),
     dimap: inputs(nFuns(3)),
     map: inputs(nFuns(2)),
     contramap: inputs(nFuns(2)),
     compose: inputs(nFuns(2)),
-    composeAll: inputs(tuple([arrayOf(isFun)])),
-    tee: inputs(tuple([isFun, any])),
-    arg: inputs(tuple([isNum])),
+    composeAll: inputs(tuple([arrayOf(fun)])),
+    tee: inputs(tuple([fun, any])),
+    arg: inputs(tuple([num])),
     reArg: inputs(nFuns(2)),
     flip: inputs(nFuns(1)),
     argsToArray: inputs(nFuns(1)),
-    argsToObject: inputs(tuple([isArray, isFun])),
-    iterate: inputs(tuple([isNum, isFun, any])),
-    apply: inputs(tuple([isArray, isFun])),
+    argsToObject: inputs(tuple([array, fun])),
+    iterate: inputs(tuple([num, fun, any])),
+    apply: inputs(tuple([array, fun])),
     curry: inputs(nFuns(1)),
-    applyFrom: inputs(tuple([isObj, any])),
-    lift: inputs(nFuns(1))
+    applyFrom: inputs(tuple([object, any])),
+    lift: inputs(nFuns(1)),
+    k: inputs(vector(2))
   }
 
   /* exports */
