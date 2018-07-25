@@ -13,6 +13,7 @@
   const { inputs } = require('guarded')
   const { array, object, fun, num, vectorOf, tuple, arrayOf, objectOf, any,
     vector } = require('fun-type')
+  const { equalDeep } = require('fun-predicate')
 
   const setName = (name, f) => setProp('name', name, f)
   const setLength = (length, f) => setProp('length', length, f)
@@ -303,9 +304,46 @@
    */
   const k = (a, b) => a
 
+  /**
+   *
+   * @function module:fun-function.get
+   *
+   * @param {*} key - array of arguments to get value in f from
+   * @param {*} f - function to get a result from
+   *
+   * @return {*} a
+   */
+  const get = apply
+
+  /**
+   *
+   * @function module:fun-function.set
+   *
+   * @param {*} key - array of arguments to set value on f to
+   * @param {*} value - value to set
+   * @param {*} f - function to set a result for
+   *
+   * @return {*} a
+   */
+  const set = (key, value, f) => (...args) =>
+    equalDeep(args, key) ? value : apply(args, f)
+
+  /**
+   *
+   * @function module:fun-function.update
+   *
+   * @param {*} key - array of arguments to update value on f to
+   * @param {*} u - update function
+   * @param {*} f - function to update a result for
+   *
+   * @return {*} a
+   */
+  const update = (key, u, f) => (...args) =>
+    equalDeep(args, key) ? u(apply(args, f)) : apply(args, f)
+
   const api = { transfer, dimap, map, contramap, compose, composeAll, k, id,
     tee, arg, args, reArg, flip, argsToArray, argsToObject, iterate, apply,
-    applyFrom, lift, pipe, pipeAll }
+    applyFrom, lift, pipe, pipeAll, set, get, update }
 
   const or = (f, g) => x => f(x) || g(x)
   const nFuns = n => vectorOf(n)(fun)
@@ -328,7 +366,9 @@
     curry: inputs(nFuns(1)),
     applyFrom: inputs(tuple([object, any])),
     lift: inputs(nFuns(1)),
-    k: inputs(vector(2))
+    k: inputs(vector(2)),
+    set: inputs(tuple([array, any, fun])),
+    update: inputs(tuple([array, fun, fun]))
   }
 
   /* exports */

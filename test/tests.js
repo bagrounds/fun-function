@@ -202,6 +202,26 @@
       [add(2), mul(3), add(-2)],
       compose(equal(3), apply([1])),
       'dimap'
+    ],
+    [
+      [[2, 2], 5, add],
+      compose(equal(5), apply([2, 2])),
+      'set'
+    ],
+    [
+      [[2, 2], 5, add],
+      compose(equal(6), apply([2, 4])),
+      'set'
+    ],
+    [
+      [[2, 2], mul(3), add],
+      compose(equal(12), apply([2, 2])),
+      'update'
+    ],
+    [
+      [[2, 2], mul(3), add],
+      compose(equal(6), apply([2, 4])),
+      'update'
     ]
   ].map(arrange({ inputs: 0, predicate: 1, contra: 2 }))
     .map(ap({ contra: get }))
